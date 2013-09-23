@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["christian.michon@gmail.com"]
   spec.description   = %q{MapDB wrapper for JRuby}
   spec.summary       = %q{MapDB wrapper}
-  spec.homepage      = "http://www.mapdb.org/"
+  spec.homepage      = "http://github.com/cmichon/jruby-mapdb"
   spec.license       = "MIT"
 
   spec.files         = Dir['{**/*}']
