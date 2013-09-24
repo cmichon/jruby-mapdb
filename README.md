@@ -32,7 +32,7 @@ Or install it yourself as:
 
 require 'jruby-mapdb'
 
-db = Jruby::Mapdb::Database.new # the MemoryDB MapDB
+db = Jruby::Mapdb::DB.new # the MemoryDB MapDB
 
 db.tree :People # this will derive a class 'People' from Jruby::Mapdb::Tree, usable as a Hash
 
@@ -50,7 +50,7 @@ p People[1]
 
 require 'jruby-mapdb'
 
-db = Jruby::Mapdb::Database.new(:foodb) # the FileDB MapDB => 2 files created ('foodb' and 'foodb.p')
+db = Jruby::Mapdb::DB.new(:foodb) # the FileDB MapDB => 2 files created ('foodb' and 'foodb.p')
 
 db.tree :People # this will derive a class 'People' from Jruby::Mapdb::Tree, usable as a Hash
 
