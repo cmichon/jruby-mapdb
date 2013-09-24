@@ -5,6 +5,7 @@ require 'jruby/mapdb/version'
 Gem::Specification.new do |spec|
   spec.name          = "jruby-mapdb"
   spec.version       = Jruby::Mapdb::VERSION
+  spec.platform      = "java"
   spec.authors       = ["Christian MICHON"]
   spec.email         = ["christian.michon@gmail.com"]
   spec.description   = %q{MapDB wrapper for JRuby}
