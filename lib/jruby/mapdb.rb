@@ -32,7 +32,6 @@ module Jruby
       alias :[]=  :encode
       alias :[]   :decode
       alias :count :size
-      private
     end
     class Tree
       extend ClassMethods
