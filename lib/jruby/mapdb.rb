@@ -28,6 +28,9 @@ module Jruby
         re = Regexp.new "#{pattern}", Regexp::EXTENDED | Regexp::IGNORECASE
         @tree.select{ |k,v| "#{k}" =~ re }.map(&:first)
       end
+      def clear
+        @tree.clear
+      end
       alias :[]=  :encode
       alias :[]   :decode
       alias :size :count

@@ -35,6 +35,9 @@ module MyTest
     assert_instance_of Hash, People[1][:features]
     assert People[1][:features][:developer]
 
+    People.clear
+    assert_equal 0, People.count
+
     assert_raise RuntimeError do
       db.tree :People
     end
