@@ -62,7 +62,6 @@ class FileDBTest < Test::Unit::TestCase
   end
   def teardown
     File.delete(@f.path + '.p')
-    @f.unlink   
   end 
   def test_file_db
     @db = Jruby::Mapdb::DB.new(@f.path)
