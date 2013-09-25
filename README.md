@@ -1,6 +1,6 @@
 # Jruby::Mapdb
 
-This is a jruby-only wrapper for MapDB. MapDB is a fast key-value store java library.
+This is a jruby-only wrapper for MapDB (v0.9.5). MapDB is a fast key-value store java library.
 
 Using this gem, MapDB trees are seen as hashes in jruby, making persistence easy and cheap.
 
@@ -83,17 +83,21 @@ It is compatible with most Enumerable methods: each, find_all, select, reject, e
 
 #regexp(pattern)          returns array of matched keys with pattern (extended + ignorecase)
 
+#clear                    empty tree (remove all previously stored keys and values)
+
 ~~~
 
 ## Testing
 
-Testing is done with a single file 'test.rb' on top of this gem:
-* a hack purely based on Test::Unit::TestCase and Unit::Test::Assertions
-* test framework dependency removed
+Testing is done using Test::Unit, and has been verified on jruby 1.6.8, 1.7.4, 1.7.5dev in both 1.8 and 1.9 modes.
 
 ~~~
-$ jruby test.rb
+$ rake
 ~~~
+
+## Contributors
+
+* fntzr (test refactoring)
 
 ## Contributing
 
