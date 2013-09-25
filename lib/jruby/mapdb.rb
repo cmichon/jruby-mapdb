@@ -8,6 +8,7 @@ module Jruby
       extend Forwardable
       def_delegator :@tree, :has_key?, :key?
       def_delegator :@tree, :count, :size
+      def_delegator :@tree, :clear, :clear
       def encode(key, value)
         @tree.put key, Marshal.dump(value).to_java_bytes
       end
@@ -25,9 +26,6 @@ module Jruby
       def regexp(pattern)
         re = Regexp.new "#{pattern}", Regexp::EXTENDED | Regexp::IGNORECASE
         @tree.select{ |k,v| "#{k}" =~ re }.map(&:first)
-      end
-      def clear
-        @tree.clear
       end
       alias :[]=  :encode
       alias :[]   :decode
