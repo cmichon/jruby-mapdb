@@ -38,18 +38,16 @@ module Jruby
       extend ClassMethods
     end
     class DB
-      attr_reader :mapdb, :trees, :type
+      attr_reader :mapdb, :type
       def initialize(dbname=nil)
         if dbname.nil?
           @type = :MemoryDB
-          @trees = []
           @mapdb = Java::OrgMapdb::DBMaker.
             newMemoryDB().
             closeOnJvmShutdown().
             make()
         else
           @type = :FileDB
-          @trees = []
           @mapdb = Java::OrgMapdb::DBMaker.
             newFileDB(Java::JavaIo::File.new("#{dbname}")).
             closeOnJvmShutdown().
@@ -58,8 +56,7 @@ module Jruby
         end
       end
       def tree(treename)
-        raise "Tree already defined" if @trees.include?(treename) || Object.const_defined?(treename)
-        trees << treename
+        raise "Tree '#{treename}' already defined" if @mapdb.get_all.map(&:first).include?(treename) || Object.const_defined?(treename)
         Object.const_set treename, Class.new(Tree)
         Object.const_get(treename).instance_variable_set :@mapdb, @mapdb
         Object.const_get(treename).instance_variable_set :@tree, @mapdb.getTreeMap("#{treename}")

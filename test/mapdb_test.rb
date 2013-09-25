@@ -9,7 +9,7 @@ module MyTest
     db.tree :People
     assert People.is_a?(Enumerable)
     assert_equal Jruby::Mapdb::Tree, People.superclass
-    assert_equal [:People], db.trees
+    assert_equal [:People], db.instance_variable_get(:@mapdb).get_all.map(&:first).map(&:to_sym)
     assert_equal [], People.entries
 
     People[0] = 'CM'
