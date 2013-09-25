@@ -56,7 +56,7 @@ module Jruby
         end
       end
       def tree(treename)
-        raise "Tree '#{treename}' already defined" if @mapdb.get_all.map(&:first).include?(treename) || Object.const_defined?(treename)
+        raise "Tree '#{treename}' already defined" if @mapdb.get_all.map(&:first).include?("#{treename}") || Object.const_defined?(treename)
         Object.const_set treename, Class.new(Tree)
         Object.const_get(treename).instance_variable_set :@mapdb, @mapdb
         Object.const_get(treename).instance_variable_set :@tree, @mapdb.getTreeMap("#{treename}")
