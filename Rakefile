@@ -1,10 +1,8 @@
-require "rubygems"
-require "rake"
-require "rake/testtask"
+%w[rubygems rake rake/testtask].map &method(:require) 
 
-desc "Run tests"
-Rake::TestTask.new "test" do |t|
-  t.libs << "test"
+desc 'Run tests'
+Rake::TestTask.new 'test' do |t|
+  t.libs << 'test'
   t.test_files = FileList['test/*_test.rb']
   t.verbose = true
 end
