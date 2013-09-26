@@ -1,5 +1,4 @@
-require "jruby/mapdb/version"
-require "forwardable"
+%w[jruby/mapdb/version forwardable].map &method(:require)
 
 module Jruby
   module Mapdb
