@@ -1,6 +1,6 @@
 # Jruby::Mapdb
 
-This is a jruby-only wrapper for MapDB (v0.9.5). MapDB is a fast key-value store java library.
+This is a jruby-only wrapper for MapDB (v0.9.6). MapDB is a fast key-value store java library.
 
 Using this gem, MapDB trees are seen as hashes in jruby, making persistence easy and cheap.
 
@@ -59,6 +59,27 @@ p People[0]
 
 People[1] = { :name => 'CM', :features => { :developer => true } }
 p People[1]
+
+~~~
+
+## Jruby::Mapdb::DB API
+
+This API has been kept as simple as possible, compatible with Ruby Hash.
+
+It is compatible with most Enumerable methods: each, find_all, select, reject, entries, etc...
+
+~~~
+
+#new                      create a MemoryDB.
+#new(dbname)              create a FileDB named dbname into current directory.
+
+#tree(treename)           create a MapDB treemap, which can be used with Jruby::Mapdb::Tree API.
+
+#close                    close DB instance.
+
+#closed?                  return true if DB instance is closed, false otherwise.
+
+#compact                  compact the DB. To be used in dedicated/isolated script, not in main script.
 
 ~~~
 
