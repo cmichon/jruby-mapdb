@@ -5,9 +5,6 @@ module Jruby
     module ClassMethods
       include Enumerable
       extend Forwardable
-      def_delegator :@tree, :has_key?, :key?
-      def_delegator :@tree, :count, :size
-      def_delegator :@tree, :clear, :clear
       def encode(key, value)
         @tree.put key, Marshal.dump(value).to_java_bytes
       end
@@ -26,14 +23,18 @@ module Jruby
         re = Regexp.new "#{pattern}", Regexp::EXTENDED | Regexp::IGNORECASE
         @tree.select{ |k,v| "#{k}" =~ re }.map(&:first)
       end
-      alias :[]=  :encode
-      alias :[]   :decode
+      def_delegator :@tree, :clear,    :clear
+      def_delegator :@tree, :has_key?, :key?
+      def_delegator :@tree, :count,    :size
+      alias :[]=   :encode
+      alias :[]    :decode
       alias :count :size
     end
     class Tree
       extend ClassMethods
     end
     class DB
+      extend Forwardable
       attr_reader :mapdb, :type
       def initialize(dbname=nil)
         if dbname.nil?
@@ -51,16 +52,17 @@ module Jruby
             make()
         end
       end
-      def count
-        Hash[*(@mapdb.getAll.map(&:first).map(&:to_sym).zip(@mapdb.getAll.map(&:last).map(&:size)).flatten)]
-      end
       def tree(treename)
-        raise "Tree '#{treename}' already defined" if @mapdb.get_all.map(&:first).include?("#{treename}") || Object.const_defined?(treename)
+        raise "Tree '#{treename}' already defined" if Object.const_defined?(treename)
         Object.const_set treename, Class.new(Tree)
         Object.const_get(treename).instance_variable_set :@mapdb, @mapdb
         Object.const_get(treename).instance_variable_set :@tree, @mapdb.getTreeMap("#{treename}")
         Object.const_get treename
       end
+      def trees
+        Hash[*(@mapdb.getAll.map(&:first).map(&:to_sym).zip(@mapdb.getAll.map(&:last).map(&:size)).flatten)]
+      end
+      def_delegators :@mapdb, :close, :closed?, :compact
     end
   end
 end

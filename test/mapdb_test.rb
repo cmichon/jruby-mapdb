@@ -35,7 +35,7 @@ module MyTest
     assert_instance_of Hash, People[1][:features]
     assert People[1][:features][:developer]
 
-    assert_equal ({:People=>2}),db.count
+    assert_equal ({:People=>2}),db.trees
 
     People.clear
     assert_equal 0, People.count
@@ -45,9 +45,8 @@ module MyTest
     end
     Object.send(:remove_const, :People)
 
-    mapdb = db.instance_variable_get(:@mapdb)
-    mapdb.close
-    assert mapdb.closed?
+    db.close
+    assert db.closed?
   end
 end
 
