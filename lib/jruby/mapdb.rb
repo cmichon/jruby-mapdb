@@ -47,7 +47,7 @@ module Jruby
           @mapdb = Java::OrgMapdb::DBMaker.
             newFileDB(Java::JavaIo::File.new("#{dbname}")).
             closeOnJvmShutdown().
-            writeAheadLogDisable().
+            transactionDisable().
             make()
         end
       end
