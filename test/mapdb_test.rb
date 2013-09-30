@@ -35,6 +35,8 @@ module MyTest
     assert_instance_of Hash, People[1][:features]
     assert People[1][:features][:developer]
 
+    assert_equal ({:People=>2}),db.count
+
     People.clear
     assert_equal 0, People.count
 

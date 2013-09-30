@@ -51,6 +51,9 @@ module Jruby
             make()
         end
       end
+      def count
+        Hash[*(@mapdb.getAll.map(&:first).map(&:to_sym).zip(@mapdb.getAll.map(&:last).map(&:size)).flatten)]
+      end
       def tree(treename)
         raise "Tree '#{treename}' already defined" if @mapdb.get_all.map(&:first).include?("#{treename}") || Object.const_defined?(treename)
         Object.const_set treename, Class.new(Tree)
