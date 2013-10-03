@@ -49,6 +49,7 @@ module Jruby
             newFileDB(Java::JavaIo::File.new("#{dbname}")).
             closeOnJvmShutdown().
             transactionDisable().
+            randomAccessFileEnable().
             make()
         end
       end
