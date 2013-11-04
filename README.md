@@ -1,6 +1,6 @@
 # Jruby::Mapdb
 
-This is a jruby-only wrapper for MapDB (v0.9.6). MapDB is a fast key-value store java library.
+This is a jruby-only wrapper for MapDB (v0.9.7). MapDB is a fast key-value store java library.
 
 Using this gem, MapDB trees are seen as hashes in jruby, making persistence easy and cheap.
 
