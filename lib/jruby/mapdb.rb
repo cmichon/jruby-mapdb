@@ -49,6 +49,8 @@ module Jruby
             newFileDB(Java::JavaIo::File.new("#{dbname}")).
             closeOnJvmShutdown().
             transactionDisable().
+            mmapFileEnable().
+            asyncWriteEnable().
             make()
         end
       end
